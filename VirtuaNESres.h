@@ -3,8 +3,8 @@
 
 // VirtuaNES version
 #define	VIRTUANES_VERSION		0x0097
-#define	VIRTUANES_FIXVERSION		""
-#define	VIRTUANES_PLUGIN_VERSION	0x0095
+#define	VIRTUANES_FIXVERSION		"2"
+#define	VIRTUANES_PLUGIN_VERSION	0x0097
 
 // VirtuaNES window class
 #define	VIRTUANES_WNDCLASS		"VirtuaNESwndclass"
