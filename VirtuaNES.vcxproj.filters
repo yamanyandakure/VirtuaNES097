@@ -1552,6 +1552,12 @@
     <Image Include="res\VirtuaNES.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\CheatImageList.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\LauncherImageList.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res\VirtuaNES.exe.manifest">
