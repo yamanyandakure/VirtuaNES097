@@ -256,6 +256,7 @@ protected:
 	LPDIRECTDRAWSURFACE7	m_lpDDTV;	// TV˜g(^^;
 	LPDIRECTDRAWCLIPPER	m_lpDDClipper;	// Clipper
 	LPDIRECTDRAWCLIPPER	m_lpDDClipper2;	// Render window Clipper
+	LPDIRECTDRAWCLIPPER	m_lpDDClipperB;	// Render window Clipper (BackSurface for window mode)
 	LPDIRECTDRAWPALETTE	m_lpDDPalette;	// DirectDraw Palette
 
 	LPBYTE			m_lpRender;

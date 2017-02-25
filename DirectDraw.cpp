@@ -212,6 +212,7 @@ CDirectDraw::CDirectDraw()
 	m_lpDDTV        = NULL;
 	m_lpDDClipper   = NULL;
 	m_lpDDClipper2  = NULL;
+	m_lpDDClipperB  = NULL;
 	m_lpDDPalette   = NULL;
 
 	m_lpRender = NULL;
@@ -521,6 +522,34 @@ DDBLTFX		ddbltfx;
 			m_lpDDClipper->SetHWnd( 0, m_hWnd );
 			m_lpDDPrimary->SetClipper( m_lpDDClipper );
 			RELEASE( m_lpDDClipper );
+
+			HWND	m_hDWnd;
+			RECT	rcD;
+
+			m_hDWnd = GetDesktopWindow();
+			GetWindowRect(m_hDWnd, &rcD);
+
+			// バックサーフェスの代わり
+			ZEROMEMORY(&ddsd, sizeof(DDSURFACEDESC2));
+			ddsd.dwSize = sizeof(DDSURFACEDESC2);
+			ddsd.dwFlags = DDSD_WIDTH | DDSD_HEIGHT | DDSD_CAPS;
+			if (!m_bSystemMemory) {
+				ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_VIDEOMEMORY;
+			} else {
+				ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
+			}
+			ddsd.dwWidth =  rcD.right;
+			ddsd.dwHeight = rcD.bottom;
+			if (m_lpDD->CreateSurface(&ddsd, &m_lpDDBack, NULL) != DD_OK)
+				throw	"CDirectDraw:CreateSurface failed.";
+
+			// クリッパーの作成
+			if (m_lpDD->CreateClipper(0, &m_lpDDClipperB, NULL) != DD_OK)
+				throw	"CDirectDraw:CreateClipper failed.";
+
+			m_lpDDClipperB->SetHWnd(0, m_hWnd);
+			m_lpDDBack->SetClipper(m_lpDDClipperB);
+			RELEASE(m_lpDDClipperB);
 		} else {
 		// フルスクリーン
 			// 排他モード
@@ -776,6 +805,7 @@ BOOL	CDirectDraw::ReleaseSurface( void )
 	GDIDELETE( m_hPalette );
 	RELEASE( m_lpDDPalette );
 
+	RELEASE( m_lpDDClipperB );
 	RELEASE( m_lpDDClipper2 );
 	RELEASE( m_lpDDClipper );
 
@@ -1622,6 +1652,36 @@ void	CDirectDraw::Flip()
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.left );
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
 
+		if( !m_bMaxZoom ) {
+			DDBLTFX	ddbltfx;
+			ddbltfx.dwSize = sizeof(DDBLTFX);
+			ddbltfx.dwFillColor = 0;
+			m_lpDDBack->Blt(&rcC, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddbltfx);
+
+			// Position offset caluclate
+			LONG	swidth, sheight;
+			LONG	dwidth, dheight;
+			LONG 	hmul, vmul;
+
+			if (!m_bAspect)  swidth = SCREEN_WIDTH;
+			else		  swidth = 320;
+			if (!m_bAllLine) sheight = SCREEN_HEIGHT - 16;
+			else		  sheight = SCREEN_HEIGHT;
+
+			dwidth = rcC.right - rcC.left;
+			dheight = rcC.bottom - rcC.top;
+			hmul = dwidth  / swidth;
+			vmul = dheight / sheight;
+
+			if (vmul < hmul) hmul = vmul;
+			else		  vmul = hmul;
+
+			rcC.left   = rcC.left + (dwidth  - swidth *hmul) / 2;
+			rcC.top    = rcC.top  + (dheight - sheight*vmul) / 2;
+			rcC.right  = rcC.left + swidth *hmul;
+			rcC.bottom = rcC.top  + sheight*vmul;
+		}
+
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
 			HDC	hdc;
 			if( m_lpDDPrimary->GetDC( &hdc ) == DD_OK ) {
@@ -1671,6 +1731,8 @@ void	CDirectDraw::Flip()
 
 	if( !m_bScreenMode ) {
 	// Window mode
+		m_lpDDBack->Blt( &rcC, m_lpDDRender, &rcS, DDBLT_WAIT, NULL );
+
 		if( m_bWindowVSync ) {
 			HRESULT	hr;
 			while( TRUE ) {
@@ -1687,7 +1749,7 @@ void	CDirectDraw::Flip()
 //			m_lpDDPrimary->Blt( NULL, m_lpDDBack, NULL, DDBLT_WAIT, NULL );
 		}
 
-		m_lpDDPrimary->Blt( &rcC, m_lpDDRender, &rcS, DDBLT_WAIT, NULL );
+		m_lpDDPrimary->Blt( NULL, m_lpDDBack, NULL, DDBLT_WAIT, NULL );
 
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
 			if( m_bPaletteUpdate ) {
@@ -1790,6 +1852,31 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 		::GetClientRect( m_hWnd, &rcC );
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.left );
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
+
+		if (!m_bMaxZoom) {
+			// Position offset caluclate
+			LONG	swidth, sheight;
+			LONG	dwidth, dheight;
+			LONG 	hmul, vmul;
+
+			if (!m_bAspect)  swidth = SCREEN_WIDTH;
+			else		  swidth = 320;
+			if (!m_bAllLine) sheight = SCREEN_HEIGHT - 16;
+			else		  sheight = SCREEN_HEIGHT;
+
+			dwidth = rcC.right;
+			dheight = rcC.bottom;
+			hmul = dwidth / swidth;
+			vmul = dheight / sheight;
+
+			if (vmul < hmul) hmul = vmul;
+			else		  vmul = hmul;
+
+			rcC.left = (dwidth - swidth *hmul) / 2;
+			rcC.top = (dheight - sheight*vmul) / 2;
+			rcC.right = rcC.left + swidth *hmul;
+			rcC.bottom = rcC.top + sheight*vmul;
+		}
 	} else {
 	// Fullscreen mode
 		DDSURFACEDESC2	ddsd;
