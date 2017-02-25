@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-#ifdef _WIN32
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 #pragma code_page(932)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -27,18 +25,18 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\r\n"
     "#include ""virtuanesres.h""\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""res\\\\VirtuaNES.exe.manifest""\r\n"
     "\0"
@@ -54,19 +52,21 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON                ICON    DISCARDABLE     "res\VirtuaNES.ico"
-IDI_SORT_DOWN           ICON    DISCARDABLE     "res\header_down.ico"
-IDI_SORT_UP             ICON    DISCARDABLE     "res\header_up.ico"
+IDI_ICON                ICON                    "res\\VirtuaNES.ico"
 
-#ifndef _MAC
+IDI_SORT_DOWN           ICON                    "res\\header_down.ico"
+
+IDI_SORT_UP             ICON                    "res\\header_up.ico"
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,9,5
- PRODUCTVERSION 0,0,9,5
+ FILEVERSION 0,9,7,2
+ PRODUCTVERSION 0,9,7,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,10 +81,11 @@ BEGIN
     BEGIN
         BLOCK "041104b0"
         BEGIN
-            VALUE "FileDescription", "VirtuaNES NES emulator for Win32\0"
-            VALUE "FileVersion", "0.95\0"
-            VALUE "InternalName", "VirtuaNES\0"
-            VALUE "LegalCopyright", "Copyright (C) 2001-2007 Norix\0"
+            VALUE "FileDescription", "VirtuaNES NES emulator for Win32"
+            VALUE "FileVersion", "0.9.7.2"
+            VALUE "InternalName", "VirtuaNES"
+            VALUE "LegalCopyright", "Copyright (C) 2001-2007 Norix"
+            VALUE "ProductVersion", "0.9.7.2"
         END
     END
     BLOCK "VarFileInfo"
@@ -93,17 +94,17 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-IDB_CHEATIMAGELIST      BITMAP  DISCARDABLE     "res\CheatImageList.bmp"
-IDB_LAUNCHERIMAGELIST   BITMAP  DISCARDABLE     "res\LauncherImageList.bmp"
-#endif    // 日本語 resources
+IDB_CHEATIMAGELIST      BITMAP                  "res\\CheatImageList.bmp"
+
+IDB_LAUNCHERIMAGELIST   BITMAP                  "res\\LauncherImageList.bmp"
+
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
