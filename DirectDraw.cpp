@@ -72,6 +72,7 @@ CDirectDraw::BLTFUNC	CDirectDraw::nxLq2xBltTable[] = {
 	&CDirectDraw::nx_lq2x_32bpp,
 };
 
+static RECT rcWS;
 
 //////////////////////////////////////////////////////////////////////
 // デフォルトパレット
@@ -1653,10 +1654,14 @@ void	CDirectDraw::Flip()
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
 
 		if( !m_bMaxZoom ) {
-			DDBLTFX	ddbltfx;
-			ddbltfx.dwSize = sizeof(DDBLTFX);
-			ddbltfx.dwFillColor = 0;
-			m_lpDDBack->Blt(&rcC, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddbltfx);
+			if ((rcWS.right - rcWS.left != rcC.right - rcC.left) || (rcWS.bottom - rcWS.top != rcC.bottom - rcC.top)) {
+				DDBLTFX	ddbltfx;
+				ddbltfx.dwSize = sizeof(DDBLTFX);
+				ddbltfx.dwFillColor = 0;
+				m_lpDDBack->Blt(&rcC, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddbltfx);
+
+				rcWS = rcC;
+			}
 
 			// Position offset caluclate
 			LONG	swidth, sheight;
@@ -1676,10 +1681,10 @@ void	CDirectDraw::Flip()
 			if (vmul < hmul) hmul = vmul;
 			else		  vmul = hmul;
 
-			rcC.left   = rcC.left + (dwidth  - swidth *hmul) / 2;
-			rcC.top    = rcC.top  + (dheight - sheight*vmul) / 2;
-			rcC.right  = rcC.left + swidth *hmul;
-			rcC.bottom = rcC.top  + sheight*vmul;
+			rcC.left   = rcC.left +( dwidth - swidth  * hmul ) / 2;
+			rcC.top    = rcC.top  +( dheight- sheight * vmul ) / 2;
+			rcC.right  = rcC.left + swidth  * hmul - 1;
+			rcC.bottom = rcC.top  + sheight * vmul - 1;
 		}
 
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
@@ -1716,10 +1721,10 @@ void	CDirectDraw::Flip()
 			if( vmul < hmul ) hmul = vmul;
 			else		  vmul = hmul;
 
-			rcC.left   = (dwidth -swidth *hmul)/2;
-			rcC.top    = (dheight-sheight*vmul)/2;
-			rcC.right  = rcC.left+swidth *hmul;
-			rcC.bottom = rcC.top +sheight*vmul;
+			rcC.left   = ( dwidth  - swidth  * hmul ) / 2;
+			rcC.top    = ( dheight - sheight * vmul ) / 2;
+			rcC.right  = rcC.left + swidth *hmul - 1;
+			rcC.bottom = rcC.top  + sheight*vmul - 1;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
@@ -1904,10 +1909,10 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 			if( vmul < hmul ) hmul = vmul;
 			else		  vmul = hmul;
 
-			rcC.left   = (dwidth -swidth *hmul)/2;
-			rcC.top    = (dheight-sheight*vmul)/2;
-			rcC.right  = rcC.left+swidth *hmul;
-			rcC.bottom = rcC.top +sheight*vmul;
+			rcC.left   = ( dwidth  - swidth  * hmul) / 2;
+			rcC.top    = ( dheight - sheight * vmul) / 2;
+			rcC.right  = rcC.left + swidth  * hmul - 1;
+			rcC.bottom = rcC.top  + sheight * vmul - 1;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
