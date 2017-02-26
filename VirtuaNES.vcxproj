@@ -2407,8 +2407,6 @@
     <ClInclude Include="zlib\zlib.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="CheatImageList.bmp" />
-    <Image Include="LauncherImageList.bmp" />
     <Image Include="res\CheatImageList.bmp" />
     <Image Include="res\header_down.ico" />
     <Image Include="res\header_up.ico" />

@@ -1537,16 +1537,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="CheatImageList.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\header_down.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\header_up.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="LauncherImageList.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\VirtuaNES.ico">
