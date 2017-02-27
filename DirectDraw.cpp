@@ -1684,9 +1684,13 @@ void	CDirectDraw::Flip()
 
 			rcC.left   = rcC.left + ( dwidth  - swidth  * hmul ) / 2;
 			rcC.top    = rcC.top  + ( dheight - sheight * vmul ) / 2;
-			rcC.right  = rcC.left + swidth  * hmul;
-			rcC.bottom = rcC.top  + sheight * vmul;
+
+			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
+			else		   rcC.right = rcC.left + swidth  * hmul;
+			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
+			else		   rcC.bottom = rcC.top + sheight * vmul;
 		}
+
 
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
 			HDC	hdc;
@@ -1724,8 +1728,11 @@ void	CDirectDraw::Flip()
 
 			rcC.left = (dwidth - swidth  * hmul) / 2;
 			rcC.top = (dheight - sheight * vmul) / 2;
-			rcC.right = rcC.left + swidth  * hmul;
-			rcC.bottom = rcC.top + sheight * vmul;
+
+			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
+			else		   rcC.right = rcC.left + swidth  * hmul;
+			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
+			else		   rcC.bottom = rcC.top + sheight * vmul;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
@@ -1880,8 +1887,11 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 
 			rcC.left = (dwidth - swidth *hmul) / 2;
 			rcC.top = (dheight - sheight*vmul) / 2;
-			rcC.right = rcC.left + swidth *hmul;
-			rcC.bottom = rcC.top + sheight*vmul;
+
+			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
+			else		   rcC.right = rcC.left + swidth  * hmul;
+			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
+			else		   rcC.bottom = rcC.top + sheight * vmul;
 		}
 	} else {
 	// Fullscreen mode
@@ -1912,8 +1922,11 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 
 			rcC.left   = ( dwidth  - swidth  * hmul) / 2;
 			rcC.top    = ( dheight - sheight * vmul) / 2;
-			rcC.right  = rcC.left + swidth  * hmul;
-			rcC.bottom = rcC.top  + sheight * vmul;
+
+			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
+			else		   rcC.right = rcC.left + swidth  * hmul;
+			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
+			else		   rcC.bottom = rcC.top + sheight * vmul;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
