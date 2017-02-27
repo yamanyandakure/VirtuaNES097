@@ -1654,11 +1654,12 @@ void	CDirectDraw::Flip()
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
 
 		if( !m_bMaxZoom ) {
-			if ((rcWS.right - rcWS.left != rcC.right - rcC.left) || (rcWS.bottom - rcWS.top != rcC.bottom - rcC.top)) {
+			if (rcWS.left != rcC.left || rcWS.top != rcC.top ||
+				(rcWS.right - rcWS.left != rcC.right - rcC.left) || (rcWS.bottom - rcWS.top != rcC.bottom - rcC.top)) {
 				DDBLTFX	ddbltfx;
 				ddbltfx.dwSize = sizeof(DDBLTFX);
 				ddbltfx.dwFillColor = 0;
-				m_lpDDBack->Blt(&rcC, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddbltfx);
+				m_lpDDBack->Blt(NULL, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddbltfx);
 
 				rcWS = rcC;
 			}
@@ -1681,10 +1682,10 @@ void	CDirectDraw::Flip()
 			if (vmul < hmul) hmul = vmul;
 			else		  vmul = hmul;
 
-			rcC.left   = rcC.left +( dwidth - swidth  * hmul ) / 2;
-			rcC.top    = rcC.top  +( dheight- sheight * vmul ) / 2;
-			rcC.right  = rcC.left + swidth  * hmul - 1;
-			rcC.bottom = rcC.top  + sheight * vmul - 1;
+			rcC.left   = rcC.left + ( dwidth  - swidth  * hmul ) / 2;
+			rcC.top    = rcC.top  + ( dheight - sheight * vmul ) / 2;
+			rcC.right  = rcC.left + swidth  * hmul;
+			rcC.bottom = rcC.top  + sheight * vmul;
 		}
 
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
@@ -1721,10 +1722,10 @@ void	CDirectDraw::Flip()
 			if( vmul < hmul ) hmul = vmul;
 			else		  vmul = hmul;
 
-			rcC.left   = ( dwidth  - swidth  * hmul ) / 2;
-			rcC.top    = ( dheight - sheight * vmul ) / 2;
-			rcC.right  = rcC.left + swidth *hmul - 1;
-			rcC.bottom = rcC.top  + sheight*vmul - 1;
+			rcC.left = (dwidth - swidth  * hmul) / 2;
+			rcC.top = (dheight - sheight * vmul) / 2;
+			rcC.right = rcC.left + swidth  * hmul;
+			rcC.bottom = rcC.top + sheight * vmul;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
@@ -1911,8 +1912,8 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 
 			rcC.left   = ( dwidth  - swidth  * hmul) / 2;
 			rcC.top    = ( dheight - sheight * vmul) / 2;
-			rcC.right  = rcC.left + swidth  * hmul - 1;
-			rcC.bottom = rcC.top  + sheight * vmul - 1;
+			rcC.right  = rcC.left + swidth  * hmul;
+			rcC.bottom = rcC.top  + sheight * vmul;
 		} else {
 			// Maximum zoom
 			rcC.left   = 0;
