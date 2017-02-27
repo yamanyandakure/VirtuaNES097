@@ -262,6 +262,8 @@ DLGMSG	CControllerDlg::OnInitDialog( DLGMSGPARAM )
 //	DEBUGOUT( "CControllerDlg::OnInitDialog\n" );
 	m_ConfigSave = Config.controller;
 
+	DirectInput.Acquire();
+
 	OnInitialMember();
 
 	return	TRUE;
