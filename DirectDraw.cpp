@@ -72,6 +72,7 @@ CDirectDraw::BLTFUNC	CDirectDraw::nxLq2xBltTable[] = {
 	&CDirectDraw::nx_lq2x_32bpp,
 };
 
+//v0.9.7.3
 static RECT rcWS;
 
 //////////////////////////////////////////////////////////////////////
@@ -213,7 +214,10 @@ CDirectDraw::CDirectDraw()
 	m_lpDDTV        = NULL;
 	m_lpDDClipper   = NULL;
 	m_lpDDClipper2  = NULL;
+
+	//v0.9.7.3
 	m_lpDDClipperB  = NULL;
+
 	m_lpDDPalette   = NULL;
 
 	m_lpRender = NULL;
@@ -530,6 +534,7 @@ DDBLTFX		ddbltfx;
 			m_hDWnd = GetDesktopWindow();
 			GetWindowRect(m_hDWnd, &rcD);
 
+			//v0.9.7.3
 			// バックサーフェスの代わり
 			ZEROMEMORY(&ddsd, sizeof(DDSURFACEDESC2));
 			ddsd.dwSize = sizeof(DDSURFACEDESC2);
@@ -806,7 +811,9 @@ BOOL	CDirectDraw::ReleaseSurface( void )
 	GDIDELETE( m_hPalette );
 	RELEASE( m_lpDDPalette );
 
+	//v0.9.7.3
 	RELEASE( m_lpDDClipperB );
+
 	RELEASE( m_lpDDClipper2 );
 	RELEASE( m_lpDDClipper );
 
@@ -1653,6 +1660,7 @@ void	CDirectDraw::Flip()
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.left );
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
 
+		//v0.9.7.3
 		if( !m_bMaxZoom ) {
 			if (rcWS.left != rcC.left || rcWS.top != rcC.top ||
 				(rcWS.right - rcWS.left != rcC.right - rcC.left) || (rcWS.bottom - rcWS.top != rcC.bottom - rcC.top)) {
@@ -1685,6 +1693,7 @@ void	CDirectDraw::Flip()
 			rcC.left   = rcC.left + ( dwidth  - swidth  * hmul ) / 2;
 			rcC.top    = rcC.top  + ( dheight - sheight * vmul ) / 2;
 
+			//v0.9.7.5
 			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
 			else		   rcC.right = rcC.left + swidth  * hmul;
 			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
@@ -1729,6 +1738,7 @@ void	CDirectDraw::Flip()
 			rcC.left = (dwidth - swidth  * hmul) / 2;
 			rcC.top = (dheight - sheight * vmul) / 2;
 
+			//v0.9.7.5
 			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
 			else		   rcC.right = rcC.left + swidth  * hmul;
 			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
@@ -1744,6 +1754,7 @@ void	CDirectDraw::Flip()
 
 	if( !m_bScreenMode ) {
 	// Window mode
+		//v0.9.7.3
 		m_lpDDBack->Blt( &rcC, m_lpDDRender, &rcS, DDBLT_WAIT, NULL );
 
 		if( m_bWindowVSync ) {
@@ -1762,6 +1773,7 @@ void	CDirectDraw::Flip()
 //			m_lpDDPrimary->Blt( NULL, m_lpDDBack, NULL, DDBLT_WAIT, NULL );
 		}
 
+		//v0.9.7.3
 		m_lpDDPrimary->Blt( NULL, m_lpDDBack, NULL, DDBLT_WAIT, NULL );
 
 		if( ddsd.ddpfPixelFormat.dwRGBBitCount == 8 ) {
@@ -1866,6 +1878,7 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.left );
 		::ClientToScreen( m_hWnd, (POINT*)&rcC.right );
 
+		//v0.9.7.3
 		if (!m_bMaxZoom) {
 			// Position offset caluclate
 			LONG	swidth, sheight;
@@ -1888,6 +1901,7 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 			rcC.left = (dwidth - swidth *hmul) / 2;
 			rcC.top = (dheight - sheight*vmul) / 2;
 
+			//v0.9.7.5
 			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
 			else		   rcC.right = rcC.left + swidth  * hmul;
 			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;
@@ -1923,6 +1937,7 @@ void	CDirectDraw::GetZapperPos( LONG& x, LONG& y )
 			rcC.left   = ( dwidth  - swidth  * hmul) / 2;
 			rcC.top    = ( dheight - sheight * vmul) / 2;
 
+			//v0.9.7.5
 			if (hmul == 4) rcC.right = rcC.left + swidth  * hmul - 1;
 			else		   rcC.right = rcC.left + swidth  * hmul;
 			if (hmul == 4) rcC.bottom = rcC.top + sheight * vmul - 1;

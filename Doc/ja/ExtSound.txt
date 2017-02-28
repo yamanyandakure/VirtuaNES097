@@ -1,0 +1,86 @@
+
+VirtuaNES version 0.75 (C)2001-2003 Norix
+
+============================
+= 外部音声ファイルに付いて =
+============================
+
+各自で用意して下さい。こちら側で用意する様な事はまずありません。
+全く別の物に変えて楽しむと言う手もあります(笑)
+
+===========================
+= WAVフォーマットに付いて =
+===========================
+
+・PCMフォーマットのみ(ADPCM等は不可)
+・サンプリングレートは再生可能なレート(標準的なレートが良いと思います)
+・ステレオでもモノラル再生
+
+※余り長い音声ファイルにしないで下さい。
+
+============
+= 利用方法 =
+============
+
+設定項目が複数ある為，以下の例の様にVirtuaNES.iniファイルを直接編集して追加して
+下さい。
+
+なお，WAVファイルは起動時に一括して読み込みます。
+
+※パス指定を忘れない様にして下さい。
+
+設定の一例
+
+[ExtraSound]
+; 燃えろプロ野球(フルパス指定)
+Moepro00=C:\VirtuaNES\MoeProSound\moepro00.wav
+Moepro01=C:\VirtuaNES\MoeProSound\moepro01.wav
+Moepro02=C:\VirtuaNES\MoeProSound\moepro02.wav
+Moepro03=C:\VirtuaNES\MoeProSound\moepro03.wav
+Moepro04=C:\VirtuaNES\MoeProSound\moepro04.wav
+Moepro05=C:\VirtuaNES\MoeProSound\moepro05.wav
+Moepro06=C:\VirtuaNES\MoeProSound\moepro06.wav
+Moepro07=C:\VirtuaNES\MoeProSound\moepro07.wav
+Moepro08=C:\VirtuaNES\MoeProSound\moepro08.wav
+Moepro09=C:\VirtuaNES\MoeProSound\moepro09.wav
+Moepro10=C:\VirtuaNES\MoeProSound\moepro10.wav
+Moepro11=C:\VirtuaNES\MoeProSound\moepro11.wav
+Moepro12=C:\VirtuaNES\MoeProSound\moepro12.wav
+Moepro13=C:\VirtuaNES\MoeProSound\moepro13.wav
+Moepro14=C:\VirtuaNES\MoeProSound\moepro14.wav
+Moepro15=C:\VirtuaNES\MoeProSound\moepro15.wav
+; ディスクシステム(相対パス指定)
+DiskSound00=.\DiskSound\Cam.wav
+DiskSound01=.\DiskSound\Motor.wav
+DiskSound02=.\DiskSound\SeekEnd.wav
+
+
+対応は以下の通りです。
+
+燃えろプロ野球
+--------------------------------------------------------------------------------
+Moepro00	ストライクッ！
+Moepro01	ボール
+Moepro02	ターイム
+Moepro03	アウッ！
+Moepro04	セーフ
+Moepro05	ファール
+Moepro06	フェアッ！
+Moepro07	バッターアウッ！
+Moepro08	プレイボール
+Moepro09	フォアボー
+Moepro10	ホーマンッ！
+Moepro11	ピチャ交代
+Moepro12	イテッ
+Moepro13	あーほっ
+Moepro14	カキッ
+Moepro15	ワーッ！（オーライッ
+--------------------------------------------------------------------------------
+
+ディスクシステム
+--------------------------------------------------------------------------------
+DiskSound00	カム音（カッ…コッ…カタン！）
+DiskSound01	モーター音（ウイーン）
+DiskSound02	シーク終了時の音（カコッ！）
+--------------------------------------------------------------------------------
+
