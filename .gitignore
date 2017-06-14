@@ -34,3 +34,6 @@
 /Japanese.vlp
 /launcher.lst
 /VirtuaNES.ini
+*.exp
+*.ilk
+*.pdb
