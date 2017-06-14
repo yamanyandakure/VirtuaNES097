@@ -28,3 +28,9 @@
 *.out
 *.app
 
+/.vs
+/Debug
+/Release_Debugout
+/Japanese.vlp
+/launcher.lst
+/VirtuaNES.ini
