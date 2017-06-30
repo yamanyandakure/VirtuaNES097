@@ -541,6 +541,9 @@
     <ClCompile Include="NES\Mapper\Mapper202.cpp">
       <Filter>NES\Mapper</Filter>
     </ClCompile>
+    <ClCompile Include="NES\Mapper\Mapper216.cpp">
+      <Filter>NES\Mapper</Filter>
+    </ClCompile>
     <ClCompile Include="NES\Mapper\Mapper222.cpp">
       <Filter>NES\Mapper</Filter>
     </ClCompile>
@@ -736,6 +739,9 @@
     <ClCompile Include="zlib\unzip.c">
       <Filter>Zlib</Filter>
     </ClCompile>
+    <ClCompile Include="NES\Mapper\Mapper216.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="VirtuaNES.rc">
@@ -876,9 +882,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nx_Super2xSaI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nx_Super2xSaI_32bpp_mmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nx_SuperEagle.h">
@@ -1317,6 +1320,9 @@
       <Filter>NES\Mapper</Filter>
     </ClInclude>
     <ClInclude Include="NES\Mapper\Mapper202.h">
+      <Filter>NES\Mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\Mapper\Mapper216.h">
       <Filter>NES\Mapper</Filter>
     </ClInclude>
     <ClInclude Include="NES\Mapper\Mapper222.h">
