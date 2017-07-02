@@ -65,8 +65,8 @@ IDI_SORT_UP             ICON                    "res\\header_up.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,9,7,6
- PRODUCTVERSION 0,9,7,6
+ FILEVERSION 0,9,7,10
+ PRODUCTVERSION 0,9,7,10
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -82,10 +82,10 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "VirtuaNES NES emulator for Win32"
-            VALUE "FileVersion", "0.9.7.6"
+            VALUE "FileVersion", "0.9.7.10"
             VALUE "InternalName", "VirtuaNES"
             VALUE "LegalCopyright", "Copyright (C) 2001-2007 Norix"
-            VALUE "ProductVersion", "0.9.7.6"
+            VALUE "ProductVersion", "0.9.7.10"
         END
     END
     BLOCK "VarFileInfo"
