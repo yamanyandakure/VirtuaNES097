@@ -55,6 +55,7 @@
 #include "Mapper032.h"
 #include "Mapper033.h"
 #include "Mapper034.h"
+#include "Mapper035.h"	//v0.9.7.12
 #include "Mapper040.h"
 #include "Mapper041.h"
 #include "Mapper042.h"
@@ -123,6 +124,7 @@
 #include "Mapper108.h"
 #include "Mapper109.h"
 #include "Mapper110.h"
+#include "Mapper111.h"	//v0.9.7.12
 #include "Mapper112.h"
 #include "Mapper114.h"
 #include "Mapper115.h"
@@ -134,6 +136,12 @@
 #include "Mapper140.h"
 #include "Mapper142.h"
 #include "Mapper160.h"
+#include "Mapper162.h"	//v0.9.7.12
+#include "Mapper163.h"	//v0.9.7.12
+#include "Mapper175.h"	//v0.9.7.11
+#include "Mapper176.h"	//v0.9.7.11
+#include "Mapper177.h"	//v0.9.7.11
+#include "Mapper178.h"	//v0.9.7.11
 #include "Mapper182.h"
 #include "Mapper183.h"
 #include "Mapper190.h"
@@ -144,7 +152,7 @@
 #include "Mapper195.h"	//v0.9.7.10
 #include "Mapper198.h"
 #include "Mapper199.h"	//v0.9.7.8
-//#include "Mapper220.h"//add
+//#include "Mapper220.h"	//v0.9.7.8
 #include "Mapper222.h"
 #include "Mapper225.h"
 #include "Mapper226.h"
@@ -168,6 +176,7 @@
 #include "Mapper249.h"
 #include "Mapper251.h"
 #include "Mapper252.h"
+//#include "Mapper253.h"	//v0.9.7.13
 #include "Mapper254.h"
 #include "Mapper255.h"
 
@@ -219,6 +228,7 @@
 #include "Mapper032.cpp"
 #include "Mapper033.cpp"
 #include "Mapper034.cpp"
+#include "Mapper035.cpp"	//v0.9.7.12
 #include "Mapper040.cpp"
 #include "Mapper041.cpp"
 #include "Mapper042.cpp"
@@ -287,6 +297,7 @@
 #include "Mapper108.cpp"
 #include "Mapper109.cpp"
 #include "Mapper110.cpp"
+#include "Mapper111.cpp"	//v0.9.7.12
 #include "Mapper112.cpp"
 #include "Mapper114.cpp"
 #include "Mapper115.cpp"
@@ -298,6 +309,12 @@
 #include "Mapper140.cpp"
 #include "Mapper142.cpp"
 #include "Mapper160.cpp"
+#include "Mapper162.cpp"	//v0.9.7.12
+#include "Mapper163.cpp"	//v0.9.7.12
+#include "Mapper175.cpp"	//v0.9.7.11
+#include "Mapper176.cpp"	//v0.9.7.11
+#include "Mapper177.cpp"	//v0.9.7.11
+#include "Mapper178.cpp"	//v0.9.7.11
 #include "Mapper182.cpp"
 #include "Mapper183.cpp"
 #include "Mapper190.cpp"
@@ -305,10 +322,10 @@
 #include "Mapper192.cpp"	//v0.9.7.9
 #include "Mapper193.cpp"
 #include "Mapper194.cpp"
-#include "Mapper195.ccp"	//v0.9.7.10
+#include "Mapper195.cpp"	//v0.9.7.10
 #include "Mapper198.cpp"
 #include "Mapper199.cpp"	//v0.9.7.8
-//#include "Mapper220.cpp"//add
+//#include "Mapper220.cpp"	//v0.9.7.8
 #include "Mapper222.cpp"
 #include "Mapper225.cpp"
 #include "Mapper226.cpp"
@@ -332,6 +349,7 @@
 #include "Mapper249.cpp"
 #include "Mapper251.cpp"
 #include "Mapper252.cpp"
+//#include "Mapper253.cpp"	//v0.9.7.13
 #include "Mapper254.cpp"
 #include "Mapper255.cpp"
 
@@ -415,6 +433,8 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper033(parent);
 		case	34:
 			return new Mapper034(parent);
+		case	35:				//v0.9.7.12
+			return new Mapper035(parent);
 		case	40:
 			return new Mapper040(parent);
 		case	41:
@@ -549,6 +569,8 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper109(parent);
 		case	110:
 			return new Mapper110(parent);
+		case	111:				//v0.9.7.12
+			return new Mapper111(parent);
 		case	112:
 			return new Mapper112(parent);
 		case	114:
@@ -571,6 +593,18 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper142(parent);
 		case	160:
 			return new Mapper160(parent);
+		case	162:				//v0.9.7.12
+			return new Mapper162(parent);
+		case	163:				//v0.9.7.12
+			return new Mapper163(parent);
+		case	175:				//v0.9.7.11
+			return new Mapper175(parent);
+		case	176:				//v0.9.7.11
+			return new Mapper176(parent);
+		case	177:				//v0.9.7.11
+			return new Mapper177(parent);
+		case	178:				//v0.9.7.11
+			return new Mapper178(parent);
 		case	182:
 			return new Mapper182(parent);
 		case	183:
@@ -579,20 +613,19 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper190(parent);
 		case	191:
 			return new Mapper191(parent);
-		case	192:	//v0.9.7.9
+		case	192:				//v0.9.7.9
 			return new Mapper192(parent);
 		case	193:
 			return new Mapper193(parent);
 		case	194:
 			return new Mapper194(parent);
-		case	195:	//v0.9.7.10
+		case	195:				//v0.9.7.10
 			return new Mapper195(parent);
 		case	198:
 			return new Mapper198(parent);
-		case	199:	//v0.9.7.8
+		case	199:				//v0.9.7.8
 			return new Mapper199(parent);
-		//case	220:
-		//	//add
+		//case	220:				//v0.9.7.8
 		//	return new Mapper220(parent);
 		case	222:
 			return new Mapper222(parent);
@@ -640,6 +673,8 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper251(parent);
 		case	252:
 			return new Mapper252(parent);
+		//case	253:				//v0.9.7.13
+		//	return new Mapper253(parent);
 		case	254:
 			return new Mapper254(parent);
 		case	255:
@@ -659,7 +694,7 @@ Mapper*	CreateMapper( NES* parent, INT no )
 			return new Mapper201(parent);
 		case	202:
 			return new Mapper202(parent);
-		case	216:	//v0.9.7.8
+		case	216:				//v0.9.7.8
 			return new Mapper216(parent);
 
 		case	61:
